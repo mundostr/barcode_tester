@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Tester</title>
+</head>
+<body>
+    <div id="last-barcode"></div>
+
+    <script>
+        let barcode = '';
+        let interval = null;
+
+        document.addEventListener('keydown', e => {
+            if (interval) clearInterval(interval);
+            
+            if (e.key === 'Enter') {
+                if (barcode.length === 0) return;
+                
+                document.querySelector('#last-barcode').innerHTML = barcode;
+                barcode = '';
+                return;
+            }
+
+            if (e.key !== 'Shift') barcode += e.key;
+            
+            interval = setInterval(() => barcode = '', 20);
+        });
+    </script>
+</body>
+</html>
